@@ -25,7 +25,6 @@ import androidx.lifecycle.ViewModel;
 import com.bumptech.glide.Glide;
 
 import java.io.File;
-import java.io.InputStream;
 
 public class EditorActivity extends AppCompatActivity {
 
@@ -109,7 +108,7 @@ public class EditorActivity extends AppCompatActivity {
             Name.setText(intent.getStringExtra(EXTRA_NAME));
             galleryImage = intent.getStringExtra(EXTRA_PHOTO);
 
-            Glide.with(getApplicationContext()).load(imageUri).into(addPhoto);
+            Glide.with(getApplicationContext()).load(galleryImage).into(addPhoto);
 
             Supplier.setText(intent.getStringExtra(EXTRA_SUPPLIER));
             Quantity.setText(intent.getStringExtra(EXTRA_QUANTITY));
@@ -136,8 +135,6 @@ public class EditorActivity extends AppCompatActivity {
                     if (requestCode == GALLERY_R_CODE) {
                         imageUri = data.getData();
                         photoUri = imageUri.toString();
-
-                        InputStream inputStream;
 
                         Glide.with(getApplicationContext()).load(photoUri).into(addPhoto);
                     }

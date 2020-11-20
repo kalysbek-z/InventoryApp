@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, EditorActivity.class);
                 intent.putExtra(EditorActivity.EXTRA_ID, product.getId());
                 intent.putExtra(EditorActivity.EXTRA_NAME, product.getName());
+                intent.putExtra(EditorActivity.EXTRA_PHOTO, product.getImageUri());
                 intent.putExtra(EditorActivity.EXTRA_SUPPLIER, product.getSupplier());
                 intent.putExtra(EditorActivity.EXTRA_QUANTITY, product.getQuantity());
                 intent.putExtra(EditorActivity.EXTRA_PRICE, product.getPrice());
@@ -100,9 +101,9 @@ public class MainActivity extends AppCompatActivity {
             String dataSupplier = data.getStringExtra(EditorActivity.EXTRA_SUPPLIER);
             int dataQuantity = data.getIntExtra(EditorActivity.EXTRA_QUANTITY, 0);
             String dataPrice = data.getStringExtra(EditorActivity.EXTRA_PRICE);
-//            String dataPhotoUri = data.getStringExtra(EditorActivity.EXTRA_PHOTO);
+            String dataPhotoUri = data.getStringExtra(EditorActivity.EXTRA_PHOTO);
 
-            Product product = new Product(dataName, dataSupplier, dataQuantity, dataPrice);
+            Product product = new Product(dataName, dataPhotoUri, dataSupplier, dataQuantity, dataPrice);
             productViewModel.insert(product);
 
             Toast.makeText(this, "Successfully saved", Toast.LENGTH_SHORT).show();
@@ -118,9 +119,9 @@ public class MainActivity extends AppCompatActivity {
             String dataSupplier = data.getStringExtra(EditorActivity.EXTRA_SUPPLIER);
             int dataQuantity = data.getIntExtra(EditorActivity.EXTRA_QUANTITY, 0);
             String dataPrice = data.getStringExtra(EditorActivity.EXTRA_PRICE);
-//            String dataPhotoUri = data.getStringExtra(EditorActivity.EXTRA_PHOTO);
+            String dataPhotoUri = data.getStringExtra(EditorActivity.EXTRA_PHOTO);
 
-            Product product = new Product(dataName, dataSupplier, dataQuantity, dataPrice);
+            Product product = new Product(dataName, dataPhotoUri, dataSupplier, dataQuantity, dataPrice);
             product.setId(id);
             productViewModel.update(product);
 
