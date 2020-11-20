@@ -38,16 +38,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ProductAdapter.ViewHolder holder, int position) {
-        Product product = dataList.get(position);
-        database = ProductDatabase.getInstance(context);
-
         if (dataList != null) {
+            Product product = dataList.get(position);
+            database = ProductDatabase.getInstance(context);
+
             holder.Name.setText(product.getName());
             holder.Supplier.setText(product.getSupplier());
             holder.Quantity.setText(product.getQuantity());
             holder.Price.setText(product.getPrice());
 
-            Glide.with(context).load(product.getImageUri()).into(holder.Photo);
+            if (product.getImageUri() != null) {
+                Glide.with(context).load(product.getImageUri()).into(holder.Photo);
+            } else {
+                Glide.with(context).load(R.drawable.no_photo).into(holder.Photo);
+            }
         }
     }
 

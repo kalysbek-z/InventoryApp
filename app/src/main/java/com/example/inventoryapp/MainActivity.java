@@ -127,8 +127,8 @@ public class MainActivity extends AppCompatActivity {
 
             Toast.makeText(this, "Successfully updated", Toast.LENGTH_SHORT).show();
         } else {
-//            int id = data.getIntExtra(EditorActivity.EXTRA_ID, UNDEFINED_ID_VALUE);
-//            productViewModel.delete(id);
+            int id = data.getIntExtra(EditorActivity.EXTRA_ID, UNDEFINED_ID_VALUE);
+            productViewModel.delete(id);
         }
     }
 }

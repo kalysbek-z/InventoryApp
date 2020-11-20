@@ -94,7 +94,9 @@ public class EditorActivity extends AppCompatActivity {
 
                 Uri imagePathUri = Uri.parse(path);
 
-                gallery.setDataAndType(imagePathUri, "image/*");
+                gallery.setType("image/*");
+                gallery.setAction(Intent.ACTION_GET_CONTENT);
+
                 startActivityForResult(gallery, GALLERY_R_CODE);
             }
         });
@@ -123,11 +125,10 @@ public class EditorActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case CAMERA_R_CODE:
-                if (requestCode == Activity.RESULT_OK) {
-                    bmpPhoto = (Bitmap) data.getExtras().get("data");
-                    if (bmpPhoto != null) {
-                        addPhoto.setImageBitmap(bmpPhoto);
-                    }
+                bmpPhoto = (Bitmap) data.getExtras().get("data");
+                if (bmpPhoto != null) {
+//                    addPhoto.setImageBitmap(bmpPhoto);
+                    Glide.with(getApplicationContext()).load(bmpPhoto).into(addPhoto);
                 }
                 break;
             case GALLERY_R_CODE:
@@ -193,7 +194,7 @@ public class EditorActivity extends AppCompatActivity {
         } else {
             Intent data = new Intent();
             data.putExtra(EXTRA_NAME, dataName);
-            data.putExtra(EXTRA_PHOTO, photoUri);
+            data.putExtra(EXTRA_PHOTO, bmpPhoto);
             data.putExtra(EXTRA_SUPPLIER, dataSupplier);
             data.putExtra(EXTRA_QUANTITY, dataQuantity);
             data.putExtra(EXTRA_PRICE, dataPrice);
